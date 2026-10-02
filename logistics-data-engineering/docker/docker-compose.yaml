@@ -1,0 +1,22 @@
+services:
+  airflow:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    command: standalone
+
+    ports:
+      - "8080:8080"
+
+    volumes:
+      - ../airflow/dags:/opt/airflow/dags
+      - ../python:/opt/airflow/python
+      - ../data:/opt/airflow/data
+      - ../logistics_dbt:/opt/airflow/dbt
+
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: "False"
+      AIRFLOW__CORE__TEST_CONNECTION: "Enabled"
+      _AIRFLOW_WWW_USER_USERNAME: "admin"
+      _AIRFLOW_WWW_USER_PASSWORD: "admin"

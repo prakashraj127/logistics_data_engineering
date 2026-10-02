@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: gold_fact_leg_performance
+    description: "Gold: one row per shipment leg, with RCS/DLV SLA status."
+    columns:
+      - name: leg_key
+        tests:
+          - unique
+          - not_null
+
+  - name: gold_fact_shipment_performance
+    description: >
+      Gold: one row per shipment, rolling up all its legs into an
+      end-to-end performance record keyed on the final outbound delivery.
+    columns:
+      - name: shipment_id
+        tests:
+          - unique
+          - not_null
+
+  - name: gold_dim_place
+    description: "Gold: distinct place codes seen across all dep/rcf hop events, with touch counts."
+    columns:
+      - name: place_code
+        tests:
+          - unique
+          - not_null
+
+  - name: gold_mart_sla_summary
+    description: "Gold: SLA on-time % and avg delay, aggregated by leg type (i1/i2/i3/o)."
+    columns:
+      - name: leg_type
+        tests:
+          - unique
+          - not_null

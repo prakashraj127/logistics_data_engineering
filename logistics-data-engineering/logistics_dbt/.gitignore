@@ -1,0 +1,36 @@
+
+target/
+dbt_packages/
+logs/
+.env
+
+logistics_dbt/profiles.yml
+
+
+*.pbix
+
+# secrets
+.env
+*.pem
+*.key
+
+# python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# generated data and logs
+data/validated/
+logs/
+*.log
+docker/logs/
+
+# dbt
+logistics_dbt/target/
+logistics_dbt/dbt_packages/
+logistics_dbt/logs/
+logistics_dbt/.user.yml
+
+# IDE
+.idea/

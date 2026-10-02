@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: raw
+    database: logistics_db
+    schema: raw
+    tables:
+      - name: RAW_CARGO_TRACKING

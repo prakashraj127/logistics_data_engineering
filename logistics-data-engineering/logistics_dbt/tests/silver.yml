@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: silver_shipments_legs
+    description: >
+      Silver: 1 row per shipment per leg actually used (i1/i2/i3/o),
+      with '?' sentinels cleaned to NULL, RCS/DLV timestamps typed, and
+      delay-in-minutes computed for both events.
+    columns:
+      - name: leg_key
+        tests:
+          - unique
+          - not_null
+      - name: shipment_id
+        tests:
+          - not_null
+      - name: leg_type
+        tests:
+          - accepted_values:
+              values: ['i1', 'i2', 'i3', 'o']
+
+  - name: silver_leg_hops
+    description: >
+      Silver: 1 row per shipment per leg per hop (1-3) actually flown,
+      with DEP/RCF timestamps and place codes cleaned + delay-in-minutes
+      computed for both events.
+    columns:
+      - name: hop_key
+        tests:
+          - unique
+          - not_null
+      - name: shipment_id
+        tests:
+          - not_null
+      - name: hop_number
+        tests:
+          - accepted_values:
+              values: [1, 2, 3]
